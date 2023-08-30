@@ -1,5 +1,4 @@
 import os
-from subprocess import getoutput
 from pyautogui import confirm,prompt
 
 version='PMS V1.0.0'
@@ -25,20 +24,6 @@ def readtxt(filepath): #读取文件
     #print(reline)######################测试语句
     return reline
 
-def ui(list): #UI列表封装
-    a=1
-
-def testofset(): #可行性检验
-    a=getoutput('java')
-    b=getoutput('javac')
-    c=getoutput('java --version')
-    print(a+'\n'+b+'\n'+c+'\n')
-    if '--help' in a and '--help' in b and 'Java(TM)' in c:
-        back = confirm(text="你的各方面配置似乎无误!现在你可以开始开设一个属于你自己的服务器了!"+'\n'+"程序运行了如下命令:"+'\n'+"'java','javac','java --version'",title=version,buttons=['继续'])
-        writing('data/set/testofset.txt','1',0)
-    elif '不是内部或外部命令，也不是可运行的程序' in a or '不是内部或外部命令，也不是可运行的程序' in b or 'Error' in c:
-        writing('data/set/testofset.txt','2',0)
-        back = confirm(text="检测到你的Java配置出现错误,请检查配置."+'\n'+'建议重新配置Java,记得配置时勾选设置系统路径'+'\n'+"程序运行了如下命令:"+'\n'+"'java','javac','java --version'",title=version,buttons=['返回'])
 
 def versionset(): #服务器版本设置
     a=readtxt('data/set/version.txt')
