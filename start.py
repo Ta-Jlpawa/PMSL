@@ -39,4 +39,4 @@ else:
     try:
         os.system('begin.bat')
     except:
-        back = confirm(text="ERROR:514.启动"+start_Num+"服务器时发生错误.",title=version,buttons=['继续'])
+        back = confirm(text="ERROR:514.1.启动"+start_Num+"服务器时发生错误.",title=version,buttons=['继续'])

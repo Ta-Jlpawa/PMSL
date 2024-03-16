@@ -146,8 +146,10 @@ def dal():
                 urllib.request.urlretrieve(http_s,'serverdown/'+str(sername[1])+'.jar',loading)
             else:
                 window(['data/bg.png'],[[60,340]],[[800,23]])
-                text(['下载进度: Fabric核心下载时无法查看进度,因为其网站采用了不同的传输方案.'],[[60,340]],[[255,255,255]],[15],'data/msyh.ttc')
+                text(['下载进度: Fabric核心下载时无法查看进度,请等待此处显示下载完成.'],[[60,340]],[[255,255,255]],[15],'data/msyh.ttc')
                 urllib.request.urlretrieve(http_s,'serverdown/'+str(sername[1])+'.jar')
+                window(['data/bg.png'],[[60,340]],[[800,23]])
+                text(['Fabric核心下载完成!'],[[60,340]],[[0,255,0]],[15],'data/msyh.ttc')
         except:
             window(['data/bg.png'],[[60,340]],[[800,23]])
             text(['ERROR:500.下载时发生未知错误,可能是网络问题,链接问题或网站问题.请检查网络并重试.'],[[60,340]],[[255,0,0]],[15],'data/msyh.ttc')
