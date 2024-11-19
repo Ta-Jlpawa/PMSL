@@ -34,3 +34,5 @@ def visit(author): #打开作者账号连接
         open('https://space.bilibili.com/1101301178')
     elif a == 'Github':
         open('https://github.com/Ta-Jlpawa/PMSL')
+    elif a == 'Minecraft_eula':
+        open('https://www.minecraft.net/zh-hans/eula')

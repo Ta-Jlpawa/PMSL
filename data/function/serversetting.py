@@ -72,7 +72,7 @@ def custom_server():
     #复制自定义的服务器文件
     sername = readtxt('data/set/sername.txt')
     shutil.copyfile(str(sername[1])+'.jar','serverdown/'+str(sername[1])+'.jar')
-
+    
 def delete_server(name):
     Server = readtxt('.ServerList/ServerList.txt')
     try:
@@ -82,8 +82,6 @@ def delete_server(name):
         shutil.rmtree('.ServerData/'+str(name))
     except:
         print('ERROR,未找到目标服务器.')
-
-
 
 def writing_server(filepath,test_what,text):
     #filepath,    文件路径
