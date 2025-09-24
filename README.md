@@ -1,4 +1,5 @@
-# PMSL  ◇  ![Language](https://img.shields.io/badge/Python-3.9.11-blue)  ![Downloads](https://img.shields.io/github/downloads/Ta-Jlpawa/PMSL/total?label=Downloads)  ![Stars](https://img.shields.io/github/stars/Ta-Jlpawa/PMSL)  ![Watch](https://img.shields.io/github/watchers/Ta-Jlpawa/PMSL)
+# ◇  PMSL 
+![Language](https://img.shields.io/badge/Python-3.9.11-blue)  ![Downloads](https://img.shields.io/github/downloads/Ta-Jlpawa/PMSL/total?label=Downloads)  ![Stars](https://img.shields.io/github/stars/Ta-Jlpawa/PMSL)  ![Watch](https://img.shields.io/github/watchers/Ta-Jlpawa/PMSL)
 
 ## Py Minecraft Server Launcher
 
