@@ -13,7 +13,7 @@ PMSL 全称 Py Minecraft Server Launcher.
 
 ## 此程序的版本
 
-目前此程序已更新至   **V 1.1.0** .
+目前此程序已更新至   **V 1.2.0 TEST_01** .
 
 ## 此程序的功能
 
