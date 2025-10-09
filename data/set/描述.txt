@@ -1,7 +1,0 @@
-core: 核心类别
-core_version: 核心版本号
-download: 是否下载
-ru: 设定的运行内存
-sername：设定的服务器名称
-start_svrf：是否完成开启服务器时的第一次运行（召唤eula.txt）
-version: MC版本
