@@ -1,6 +1,9 @@
 # ◇  PMSL 
 ![Language](https://img.shields.io/badge/Python-3.9.11-blue)  ![Downloads](https://img.shields.io/github/downloads/Ta-Jlpawa/PMSL/total?label=Downloads)  ![Stars](https://img.shields.io/github/stars/Ta-Jlpawa/PMSL)  ![Watch](https://img.shields.io/github/watchers/Ta-Jlpawa/PMSL)
 
+## 注意，此程序正在重构中
+**重构目标：将源码面向过程的设计改为面向对象的设计**
+
 ## Py Minecraft Server Launcher
 
 PMSL 全称 Py Minecraft Server Launcher.  
