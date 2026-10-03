@@ -1,4 +1,0 @@
-{core} : 变量_核心类别
-{mc_version} : 变量_MC版本
-{core_version} : 变量_核心版本(Paper)
-{core_version_L} {core_version_I}  : 变量_核心版本(Fabric)

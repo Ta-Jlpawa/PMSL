@@ -1,8 +1,6 @@
-# ◇  PMSL 
-![Language](https://img.shields.io/badge/Python-3.9.11-blue)  ![Downloads](https://img.shields.io/github/downloads/Ta-Jlpawa/PMSL/total?label=Downloads)  ![Stars](https://img.shields.io/github/stars/Ta-Jlpawa/PMSL)  ![Watch](https://img.shields.io/github/watchers/Ta-Jlpawa/PMSL)
+# ◇  PMSL
 
-## 注意，此程序正在重构中
-**重构目标：将源码面向过程的设计改为面向对象的设计**
+![Language](https://img.shields.io/badge/Python-3.9.11-blue)  ![Downloads](https://img.shields.io/github/downloads/Ta-Jlpawa/PMSL/total?label=Downloads)  ![Stars](https://img.shields.io/github/stars/Ta-Jlpawa/PMSL)  ![Watch](https://img.shields.io/github/watchers/Ta-Jlpawa/PMSL)
 
 ## Py Minecraft Server Launcher
 
@@ -16,7 +14,8 @@ PMSL 全称 Py Minecraft Server Launcher.
 
 ## 此程序的版本
 
-目前此程序已更新至   **V 1.2.0 TEST_01** .
+目前此程序已更新至 **V 1.2.0 TEST_01** .
+目前此程序正在开发 **V 1.3.0**
 
 ## 此程序的功能
 
@@ -31,25 +30,6 @@ PMSL 全称 Py Minecraft Server Launcher.
 - 支持使用更多种类的服务器核心
 - 优化自定义核心功能
 - 支持修改更多的服务器设置
-
-## 开发者注意事项
-
-主程序`PyMinecraftServerLanucher.py`通过执行名为`start.exe`的可执行文件来运行服务器，`start.exe`来源于存储库中的`start.py`，因此若想要正常运行主程序，需要将`start.py`打包为可执行文件并放在主程序目录下，或者自行将`PyMinecraftServerLanucher.py`中涉及`start.exe`的源码改为调用`start.py`.
-
-**举例:**
-```python
-
-def start_exe():
-    os.system(r"start powershell.exe cmd /k 'start.exe'")
-
-```
-**改为**
-```python
-
-def start_exe():
-    os.system(r"start powershell.exe cmd /k 'start.py'")
-
-```
 
 ## 关于作者
 
