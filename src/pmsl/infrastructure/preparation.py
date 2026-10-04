@@ -1,4 +1,4 @@
-"""核心安装、未同意 EULA 的初始化以及可重用启动配方。"""
+"""安装和初始化服务器核心，校验 EULA 与配置并生成启动参数。"""
 
 import json
 import os
@@ -94,7 +94,7 @@ class Preparer:
                     raise PreparationError("Forge 安装缺少所选版本的启动参数或服务器 JAR。")
                 validate_jar(old_jar, cancel)
                 arguments = ["-jar", old_jar.name, "--nogui"]
-        # 重试只能继续未同意的初始化，不因残留 eula=true 启动完整世界。
+        # 初始化前重置 EULA，避免重试时沿用上次的同意状态。
         eula_path = self.paths.inside(directory / "eula.txt")
         if eula_path.exists():
             document = PropertiesDocument.read(self.paths, eula_path)
@@ -173,7 +173,7 @@ def profile_launch_plan(
         or not all(isinstance(value, str) for value in arguments)
     ):
         raise PreparationError("服务器启动配方格式无效。")
-    # 配方只能指向本服务器目录里的核心或安装参数文件。
+    # 校验启动参数格式及目标文件所属的服务器目录。
     if arguments[-1] != "--nogui":
         raise PreparationError("服务器启动配方参数不受支持。")
     targets = (

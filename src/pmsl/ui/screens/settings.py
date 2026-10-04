@@ -1,4 +1,4 @@
-"""三个设置页共享生命周期，具名按钮对应现有设置行为。"""
+"""绘制程序、显示和其他设置页面。"""
 
 from pmsl.domain.states import Page
 from pmsl.ui.scene_builder import SceneBuilder

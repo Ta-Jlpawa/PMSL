@@ -1,4 +1,4 @@
-"""属性视图只在读取或成功提交后更新。"""
+"""管理服务器属性的读取和修改，保存当前编辑快照。"""
 
 from typing import Optional, Protocol
 

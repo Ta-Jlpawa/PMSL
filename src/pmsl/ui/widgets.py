@@ -1,4 +1,4 @@
-"""绘制数据与按钮命中规则；按钮持有具名动作，不依赖外部数组下标。"""
+"""定义图片、文字、按钮和场景，处理绘制与按钮命中检测。"""
 
 from dataclasses import dataclass
 from typing import Any, Callable, Optional, Tuple, Union

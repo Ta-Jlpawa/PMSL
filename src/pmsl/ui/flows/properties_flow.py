@@ -1,4 +1,4 @@
-"""属性页具名动作与稳定 ID 选择；弹窗在主线程执行。"""
+"""准备服务器属性视图，处理页面导航和基于弹窗的属性编辑。"""
 
 from typing import TYPE_CHECKING, Optional, Tuple
 

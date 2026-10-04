@@ -1,4 +1,4 @@
-"""属性编辑的只读快照，键名与显示名称分离。"""
+"""定义可编辑的服务器属性键和属性快照。"""
 
 from dataclasses import dataclass
 from typing import Optional, Tuple

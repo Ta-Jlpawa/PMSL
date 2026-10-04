@@ -1,4 +1,4 @@
-"""首页场景，服务器业务通过兼容适配器调用。"""
+"""绘制服务器列表、当前服务器资料和首页操作按钮。"""
 
 from pmsl.ui.scene_builder import SceneBuilder
 from pmsl.ui.screens.base import SceneScreen

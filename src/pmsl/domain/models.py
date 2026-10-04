@@ -1,4 +1,4 @@
-"""领域对象不导入界面库，也不执行文件读写。"""
+"""定义服务器资料、程序设置、启动参数和任务事件的数据模型。"""
 
 from dataclasses import dataclass, field
 from typing import Dict, Optional, Tuple

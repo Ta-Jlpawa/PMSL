@@ -1,4 +1,4 @@
-"""创建页文本只在准备或显式刷新时读取，限制展示大小。"""
+"""读取创建提示和 EULA，严格解码并限制 EULA 的显示长度。"""
 
 from typing import List, Tuple
 

@@ -1,4 +1,4 @@
-"""目录与设置的类型转换、版本验证和原子存储。"""
+"""读写服务器清单和程序设置，并完成 JSON 与领域对象之间的转换。"""
 
 import re
 from dataclasses import asdict

@@ -1,4 +1,4 @@
-"""运行状态和有界日志快照。"""
+"""定义服务器运行状态和日志快照。"""
 
 from dataclasses import dataclass
 from typing import Optional, Tuple

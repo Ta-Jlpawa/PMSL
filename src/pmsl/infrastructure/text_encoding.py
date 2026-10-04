@@ -1,4 +1,4 @@
-"""提示和 EULA 文本采用严格解码，保留 UTF-8 BOM 与中文 GBK。"""
+"""严格解码 UTF-8、带 BOM 的 UTF-8 和 GBK 文本，返回文本及编码名称。"""
 
 from typing import Tuple
 

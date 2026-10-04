@@ -1,4 +1,4 @@
-"""Windows 私有任务目录、进程身份、控制台和进程树适配。"""
+"""封装 Windows 目录权限、进程身份查询、控制台和进程树管理。"""
 
 import ctypes
 import os
@@ -55,7 +55,7 @@ def protect_directory(path: str) -> None:
         sid = ctypes.cast(buffer, ctypes.POINTER(w.LPVOID))[0]
         if not security.ConvertSidToStringSidW(sid, ctypes.byref(sid_text)):
             raise ctypes.WinError(ctypes.get_last_error())
-        # 子文件继承当前用户和 SYSTEM 的权限，移除继承的宽泛写权限。
+        # 限定当前用户和 SYSTEM 可访问目录，并让子文件继承此权限。
         sddl = "D:P(A;OICI;FA;;;SY)(A;OICI;FA;;;%s)" % sid_text.value
         if not security.ConvertStringSecurityDescriptorToSecurityDescriptorW(
             sddl, 1, ctypes.byref(descriptor), None
@@ -74,7 +74,7 @@ def protect_directory(path: str) -> None:
 
 def process_identity(pid: int) -> Dict[str, object]:
     if os.name != "nt":
-        # 跨平台恢复不猜测身份，交给人工处理；本轮目标平台是 Windows。
+        # 非 Windows 平台仅返回 PID，创建时间和执行路径留空。
         return {"pid": pid, "created": None, "executable": None}
     kernel = _kernel()
     kernel.OpenProcess.argtypes = [w.DWORD, w.BOOL, w.DWORD]

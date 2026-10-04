@@ -1,4 +1,4 @@
-"""显式安装自检：准备完整界面会话，不启动服务器或探测 Java。"""
+"""检查发行资源、字体、界面页面和运行环境，支持本机窗口与弹窗验证。"""
 
 import json
 import os
@@ -137,7 +137,7 @@ def verify_installation(paths: AppPaths, headless: bool = True) -> int:
             unicode_encoding="cp936",
         )
     except Exception as exc:
-        # 自检保留异常信息，正常业务仍按自己的错误边界处理。
+        # 将异常详情写入自检报告。
         report["error"] = "%s: %s" % (type(exc).__name__, exc)
     finally:
         for name, value in previous.items():

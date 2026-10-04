@@ -1,4 +1,4 @@
-"""用准备好的图片和字体构建不可变场景，保持原文本居中与混合方式。"""
+"""将图片、文字和按钮组合成页面场景。"""
 
 from functools import partial
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union

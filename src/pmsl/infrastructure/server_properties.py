@@ -1,4 +1,4 @@
-"""按稳定 ID 校验目录，并在新内容上合并单个属性改动。"""
+"""读取服务器属性，检查外部修改冲突并保存单项属性变更。"""
 
 from typing import Optional
 
@@ -58,7 +58,7 @@ class ServerPropertyStore:
         if current != expected:
             raise StorageError("该属性已被外部修改，请重新进入页面刷新后再编辑。")
         document.set(key, value)
-        # 重验目录身份及读入后发生的文件变化，避免基于过期内容落盘。
+        # 写入前再次校验目录身份和文件内容，检测读取后的外部修改。
         self.layout.file(self.servers.get(server_id), "server.properties")
         if path.read_bytes() != before:
             raise StorageError("保存前属性文件发生变化，请刷新后重试。")

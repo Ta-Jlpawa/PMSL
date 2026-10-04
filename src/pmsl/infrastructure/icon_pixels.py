@@ -1,4 +1,4 @@
-"""固定图标尺寸的 RGBA 采样与遮罩；只使用标准库。"""
+"""缩放 RGBA 图标并应用固定四边形遮罩。"""
 
 import math
 import struct
@@ -33,7 +33,7 @@ def _axis(size: int, target: int, horizontal: bool) -> List[Tuple[int, int, int,
 
 
 def mask_span(row: int) -> Tuple[int, int]:
-    # 原固定四边形的裁切边界：左边向下取整，右边沿裁切后的线段取最近像素。
+    # 将四边形左右边界换算为当前行的像素范围。
     return 35 - (35 * row + 395) // 396, 214 - (34 * max(0, row - 11) + 192) // 385
 
 
@@ -62,7 +62,7 @@ def crop_rgba(source: bytes, size: Tuple[int, int]) -> bytes:
                 for channel in range(4):
                     first = source[indices[0] + channel] * a + source[indices[1] + channel] * b
                     second = source[indices[2] + channel] * a + source[indices[3] + channel] * b
-                    # 保持原 8 位线性采样的系数精度及两阶段整数舍入。
+                    # 固定点权重和分步舍入用于匹配 OpenCV 的缩放结果。
                     top_value = (upper * (first >> 4)) >> 16
                     bottom_value = (lower * (second >> 4)) >> 16
                     result[destination + channel] = (top_value + bottom_value + 2) >> 2

@@ -1,4 +1,4 @@
-"""原子 JSON、同目录备份与跨进程写锁。"""
+"""提供跨进程实例锁、JSON 原子读写、备份和损坏文件恢复。"""
 
 import json
 import os
@@ -29,7 +29,7 @@ def validate_schema(document: Document) -> None:
 
 
 class InstanceLock:
-    """锁从获取直到关闭持续有效；不能用锁文件的存在性判断实例状态。"""
+    """通过操作系统文件锁限制同一程序目录的并发写入，退出时释放锁。"""
 
     def __init__(self, paths: AppPaths) -> None:
         self.paths = paths
@@ -84,7 +84,7 @@ class InstanceLock:
 
 
 class JsonStorage:
-    """读取不产生目录；写入必须持有此数据目录的实例锁。"""
+    """读写程序数据目录中的 JSON；修改操作要求持有对应的实例锁。"""
 
     def __init__(self, paths: AppPaths, lock: Optional[InstanceLock] = None) -> None:
         if lock is not None and lock.paths != paths:
@@ -116,7 +116,7 @@ class JsonStorage:
         temporary: Optional[Path] = None
         try:
             path.parent.mkdir(parents=True, exist_ok=True)
-            # 暂存文件与目标在同目录，不能使用系统临时目录。
+            # 在目标目录创建暂存文件，确保后续替换位于同一文件系统。
             with tempfile.NamedTemporaryFile(
                 mode="wb",
                 prefix=".%s-" % path.name,
@@ -170,7 +170,7 @@ class JsonStorage:
         relative: str,
         validator: Callable[[Document], None] = validate_schema,
     ) -> None:
-        """显式恢复；拒绝用旧备份降级覆盖更高版本的主文件。"""
+        """用有效备份恢复缺失或损坏的文件；不覆盖有效文件或不支持的数据版本。"""
         self._require_lock()
         primary = self.paths.data(relative)
         if primary.exists():
@@ -184,7 +184,7 @@ class JsonStorage:
                 raise StorageError("主文件有效，无需恢复备份。")
         backup = self.read(relative + ".bak", validator)
         if primary.exists():
-            # 保留损坏的原始字节供排查，不把坏文件当作有效备份。
+            # 恢复前另存损坏文件，保留原始内容供排查。
             self._replace_bytes(self.paths.data(relative + ".damaged"), primary.read_bytes())
         content = (json.dumps(backup, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
         self._replace_bytes(primary, content)

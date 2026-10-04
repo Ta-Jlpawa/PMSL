@@ -1,4 +1,4 @@
-"""创建任务的不可变输入、进度和启动配方。"""
+"""定义创建任务输入、下载来源、进度快照和核心执行结果。"""
 
 from dataclasses import dataclass
 from typing import Optional, Tuple

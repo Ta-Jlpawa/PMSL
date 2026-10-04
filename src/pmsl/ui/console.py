@@ -1,4 +1,4 @@
-"""控制台只负责输入和可见行绘制，不创建或判定进程。"""
+"""处理控制台输入、滚动和光标，绘制可见日志及指令输入框。"""
 
 from collections import OrderedDict
 from typing import Any, Callable, List, Optional, Tuple

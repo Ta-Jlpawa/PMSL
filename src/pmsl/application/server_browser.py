@@ -1,4 +1,4 @@
-"""按稳定 ID 保留服务器选择；清单刷新及翻页不依赖显示名称。"""
+"""管理服务器列表与当前选择，按服务器 ID 保留选择并生成概要。"""
 
 from dataclasses import dataclass, replace
 from typing import Optional, Tuple

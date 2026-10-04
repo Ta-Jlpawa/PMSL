@@ -1,4 +1,4 @@
-"""实际进程、增量解码和有界日志；不导入界面。"""
+"""管理服务器进程树、标准输入输出、运行状态和滚动日志。"""
 
 import codecs
 import os
@@ -77,7 +77,7 @@ class ProcessSession:
                 creationflags=(0x08000000 | 4) if os.name == "nt" else 0,
                 start_new_session=os.name != "nt",
             )
-            # 先挂入进程树再恢复线程，防止 BAT 在登记之前派生 Java。
+            # 将暂停的进程加入受控进程树后再恢复，确保子进程也受控。
             self.tree.attach_and_resume(self.process)
             self.reader = threading.Thread(target=self._read, daemon=True, name="pmsl-output")
             self.reader.start()
@@ -145,7 +145,7 @@ class ProcessSession:
                 self.process.stdin.flush()
         except (OSError, ValueError, UnicodeError) as exc:
             raise PmslError("指令发送失败：%s" % exc) from exc
-        # 日志落盘只有读取线程负责，避免与滚动写入并发。
+        # 输入回显仅更新内存日志，文件写入由输出读取线程负责。
         with self._lock:
             self._lines.append("> " + command)
             self._revision += 1
@@ -193,7 +193,7 @@ class ProcessSession:
             return LogSnapshot(self._revision, tuple(self._lines))
 
     def close(self) -> None:
-        # 仅处理此对象持有的进程树，不按保存的 PID 查杀。
+        # 关闭本会话持有的进程树并释放输入输出资源。
         self.tree.close()
         if self.process is not None:
             if self.process.poll() is None:

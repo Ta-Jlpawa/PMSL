@@ -1,4 +1,4 @@
-"""无 GUI 依赖的同发行程序 runner。"""
+"""运行独立服务器任务，在控制台与启动器之间传递指令、状态和日志。"""
 
 import os
 import queue
@@ -19,7 +19,7 @@ from pmsl.infrastructure.windows import open_console, process_identity
 def run_task(paths: AppPaths, task_id: str, token: str, digest: str) -> int:
     task = RuntimeTask(paths, task_id, token)
     plan, document = task.load_plan(digest)
-    # 原子独占认领，即使同一参数被再次执行也不会重复启动。
+    # 独占创建认领文件，防止同一任务重复启动。
     task.claim(digest)
     session = ProcessSession(paths, task_id, document["server_id"], plan, document["save_log"])
     identity = process_identity(os.getpid())
@@ -117,7 +117,7 @@ def runner_arguments(task: RuntimeTask, digest: str) -> Any:
     args = ["--runner", task.id, "--task-token", task.token, "--plan-hash", digest]
     if getattr(sys, "frozen", False):
         return [sys.executable, *args]
-    # 源码根入口从代码位置定位；测试可把程序数据根设为独立副本。
+    # 数据目录缺少入口时，从源码位置定位启动脚本。
     source = task.paths.program_dir / "PyMinecraftServerLanucher.py"
     if not source.is_file():
         from pathlib import Path

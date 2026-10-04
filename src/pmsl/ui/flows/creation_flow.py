@@ -1,4 +1,4 @@
-"""现有八步向导的任务适配；草稿只存在于本会话。"""
+"""协调八步创建向导的输入、任务、EULA 和结果显示。"""
 
 import random
 import time
@@ -485,7 +485,7 @@ class CreationFlow:
                     )
                     == "强制继续"
                 ):
-                    # 保留按钮，但它只能重新安装/探测，不伪造 first_start=1。
+                    # 强制继续按钮重新执行初始化，仍需通过后续校验。
                     self.task.prepare(session._configured_java())
             elif state in {CreationState.WAITING_FOR_EULA, CreationState.COMMITTING}:
                 if not self._read_eula():
@@ -532,7 +532,7 @@ class CreationFlow:
         previous = self._observed
         self._observed = self._display = snapshot
         session = self.session
-        # 只更新视图状态，最终结果不受下载进度限频影响。
+        # 通知页面刷新；完成、失败等状态不受下载进度限频影响。
         session.invalidate()
         if session.page is Page.CREATE_EULA and (
             previous is None or previous.state != snapshot.state

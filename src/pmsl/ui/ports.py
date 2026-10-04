@@ -1,4 +1,4 @@
-"""UI 所需的视图与动作能力；页面不知道旧字典和磁盘布局。"""
+"""定义页面访问视图、触发操作和管理会话所需的接口。"""
 
 from typing import Any, Optional, Protocol
 

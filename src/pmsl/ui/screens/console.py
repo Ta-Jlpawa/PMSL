@@ -1,4 +1,4 @@
-"""控制台仅准备原底部返回按钮；日志由独立控制台组件绘制。"""
+"""构建控制台页面的返回按钮场景。"""
 
 from pmsl.ui.scene_builder import SceneBuilder
 from pmsl.ui.screens.base import SceneScreen

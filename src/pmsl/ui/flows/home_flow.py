@@ -1,4 +1,4 @@
-"""首页资料与具名管理动作；页面只消费已准备的视图。"""
+"""准备首页数据，处理服务器选择、启动、重命名、图标修改和回收。"""
 
 import io
 from dataclasses import replace
@@ -134,7 +134,7 @@ class HomeFlow:
             return
         source = Path(selected)
         payload = encode_icon(source)
-        # 解码及场景资源均在替换前准备，失败时保留原文件和原画面。
+        # 保存图标前完成解码和显示准备，失败时保留现有图标。
         prepared = pygame.image.load(io.BytesIO(payload)).convert_alpha()
         target = ServerIcons(session.storage).save(profile.id, payload)
         session.assets.invalidate_image(target)

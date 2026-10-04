@@ -1,4 +1,4 @@
-"""通过参数列表探测 JRE；不要求无关的 javac。"""
+"""定位 Java 可执行文件并探测运行时版本。"""
 
 import os
 import re

@@ -1,4 +1,4 @@
-"""关于作者页面保留原文案、链接与布局。"""
+"""绘制作者信息和项目链接页面。"""
 
 from pmsl.ui.scene_builder import SceneBuilder
 from pmsl.ui.screens.base import SceneScreen

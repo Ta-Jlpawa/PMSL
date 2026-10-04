@@ -1,4 +1,4 @@
-"""新的唯一 Pygame 主循环；过渡业务和资源由组装处传入。"""
+"""注册页面并运行 Pygame 主循环，分发事件、更新状态和绘制界面。"""
 
 from functools import partial
 from typing import Any, Callable, Dict

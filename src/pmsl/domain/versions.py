@@ -1,4 +1,4 @@
-"""离线版本目录与核心选择的纯数据契约。"""
+"""定义核心版本目录和创建输入，校验游戏与核心组件的版本组合。"""
 
 import re
 from dataclasses import dataclass

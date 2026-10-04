@@ -1,4 +1,4 @@
-"""页面生命周期与刷新；页面切换只使用具名 Page。"""
+"""管理页面创建、切换、更新和关闭。"""
 
 from typing import Any, Callable, Dict, Optional, Protocol
 
@@ -21,7 +21,7 @@ class Navigation:
 
     def go(self, page: Page) -> None:
         candidate = self.factories[page]()
-        # 新页面准备失败时保留当前页面。
+        # 先准备目标页面，成功后再替换当前页面。
         candidate.enter()
         if self.screen is not None:
             self.screen.leave()

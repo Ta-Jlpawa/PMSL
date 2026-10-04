@@ -1,4 +1,4 @@
-"""保留未修改字节的 Java properties 编辑器。"""
+"""读取、校验和修改 Java properties 文件，保留未修改的原始内容。"""
 
 import re
 from dataclasses import dataclass
@@ -29,7 +29,7 @@ def _unescape(value: str) -> str:
             index += 4
         else:
             result.append({"t": "\t", "r": "\r", "n": "\n", "f": "\f"}.get(character, character))
-    # Java 的两个 UTF-16 转义可组成一个非 BMP 字符。
+    # 合并成对的 UTF-16 代理项，还原完整字符。
     return "".join(result).encode("utf-16-le", "surrogatepass").decode("utf-16-le", "surrogatepass")
 
 

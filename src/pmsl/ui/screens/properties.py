@@ -1,4 +1,4 @@
-"""两页属性仅消费快照，保持原点击区域、数值与布尔按钮布局。"""
+"""绘制世界设置和服务器设置的属性编辑页面。"""
 
 from pmsl.domain.states import Page
 from pmsl.ui.scene_builder import SceneBuilder

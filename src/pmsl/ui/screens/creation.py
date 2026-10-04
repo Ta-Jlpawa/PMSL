@@ -1,4 +1,4 @@
-"""创建前五步仅绘制输入快照和具名选择，保持原布局与文字居中。"""
+"""绘制创建向导的类型、核心、版本和参数选择页面。"""
 
 from pmsl.domain.states import Page
 from pmsl.ui.models import CreationView, VersionListView
@@ -40,7 +40,7 @@ class CreationScreen(SceneScreen):
             for text, size, color in zip(values, sizes, colors)
         ]
         widths = [image.get_width() for image in rendered]
-        # 原标题按分隔符宽度计算居中，沿用该计算保证像素一致。
+        # 将分隔符宽度按四段计入总宽度，再计算标题起点。
         total = sum(width * 4 if width == widths[5] else width for width in widths)
         x = (1000 - total) // 2
         for index in range(5):

@@ -1,7 +1,4 @@
-"""
-创建后台任务
-用于发布快照，不接触界面、弹窗或目录清单。
-"""
+"""管理服务器创建任务，执行下载、初始化、EULA 确认并发布进度快照。"""
 
 import json
 import re
@@ -90,7 +87,7 @@ class CreationTask:
             except TaskCancelled:
                 self._state(CreationState.CANCELLED)
             except Exception as exc:
-                # 工作线程的最终出口必须可靠发布错误，避免未知异常留下运行假象。
+                # 将工作线程异常写入失败快照，供界面显示。
                 self._state(CreationState.FAILED, str(exc))
 
         self._thread = threading.Thread(target=run, name="pmsl-creation", daemon=False)
@@ -256,7 +253,7 @@ class CreationTask:
             preparer.validate_generated(task.server_dir, accepted=task.accepted)
             task._state(state)
         else:
-            # 初始化中断只回到已下载状态，由用户再次启动准备流程。
+            # 恢复为已下载状态，等待用户重新执行初始化。
             task.recipe_sha256 = None
             task._state(CreationState.DOWNLOADED)
         return task

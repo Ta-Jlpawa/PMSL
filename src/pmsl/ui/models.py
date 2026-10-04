@@ -1,4 +1,4 @@
-"""页面只消费视图数据，不读取服务器文件。"""
+"""定义首页、设置、版本列表、创建向导和属性页的视图数据。"""
 
 from dataclasses import dataclass
 from typing import Any, Optional

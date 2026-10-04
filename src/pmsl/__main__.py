@@ -1,4 +1,4 @@
-"""模块启动入口。"""
+"""通过 python -m pmsl 启动程序。"""
 
 from pmsl.bootstrap import main
 

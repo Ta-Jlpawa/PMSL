@@ -1,4 +1,4 @@
-"""原设置页的具名动作；存储和资源导入由独立模块负责。"""
+"""准备设置页数据，处理设置修改、自定义资源导入和默认资源恢复。"""
 
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional

@@ -1,4 +1,4 @@
-"""入口分流和依赖组装，界面依赖按所选模式延迟加载。"""
+"""解析命令行参数，组装应用服务并启动界面或管理命令。"""
 
 import argparse
 import json
@@ -15,14 +15,14 @@ from pmsl.infrastructure.storage import InstanceLock, JsonStorage
 
 @contextmanager
 def program_environment(paths: AppPaths) -> Iterator[None]:
-    # 在入口统一管理程序工作目录和子进程临时目录。
+    # 执行期间切换到程序目录，退出时恢复调用方环境。
     previous = Path.cwd()
     old_sys_path = list(sys.path)
     temporary = paths.data("tmp")
     temporary.mkdir(parents=True, exist_ok=True)
     old_temporary_environment = {key: os.environ.get(key) for key in ("TEMP", "TMP")}
     try:
-        # 子进程继承程序内的临时目录。
+        # 让子进程继承程序内的临时目录设置。
         for key in ("TEMP", "TMP"):
             os.environ[key] = str(temporary)
         os.chdir(str(paths.program_dir))
@@ -102,7 +102,7 @@ def main(arguments: Optional[List[str]] = None) -> int:
     parser.add_argument("--plan-hash", help=argparse.SUPPRESS)
     parser.add_argument("--program-dir", help=argparse.SUPPRESS)
     options = parser.parse_args(arguments)
-    # 禁止 Python 在程序目录以外生成第三方库字节码。
+    # 禁用字节码缓存写入，避免导入外部库时产生文件。
     sys.dont_write_bytecode = True
     try:
         paths = AppPaths.discover()

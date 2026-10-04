@@ -1,4 +1,4 @@
-"""四类核心的确切版本解析与安全下载模板。"""
+"""解析 Paper、Spigot、Forge 和 Fabric 的下载地址并校验下载模板。"""
 
 import re
 import string

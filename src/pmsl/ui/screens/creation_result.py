@@ -1,4 +1,4 @@
-"""下载、EULA 和完成页只绘制当前任务视图。"""
+"""绘制创建向导的下载进度、EULA 和完成页面。"""
 
 from typing import Tuple
 

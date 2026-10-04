@@ -1,4 +1,4 @@
-"""统一启动、输入、停止和快照；UI 保持一个活动服务器。"""
+"""统一管理内嵌与外部控制台的启动、指令、停服和运行快照。"""
 
 import os
 import subprocess
@@ -105,7 +105,7 @@ class ServerRuntime:
                 self.session = None
             state = ProcessState.FAILED
             if self.runner is not None and self.runner.poll() is None:
-                # 持有的 runner 仍存活时保留阻塞状态，不把身份探测失败当成停服。
+                # runner 尚未退出时保留活动状态，阻止再次启动服务器。
                 state = ProcessState.STARTING
                 self._send("force")
             self._snapshot = replace(self._snapshot, state=state, error=str(exc))
@@ -137,7 +137,7 @@ class ServerRuntime:
                 self.task.publish(self._snapshot, self._identity, 0, logs)
                 self._published = signature
         elif self.runner is not None:
-            # 先确认退出再读最终状态，避免把刚发布的正常停服覆盖成意外退出。
+            # 先检查 runner 是否退出，再读取其最终状态，避免误判正常停服。
             runner_exited = self.runner.poll() is not None
             document = self.task.read("status.json")
             identity = document.get("identity", {})
@@ -227,7 +227,7 @@ class ServerRuntime:
             self.update(force=True)
             self._logs = self.session.logs()
             self.session = None
-        # 外部 runner 拥有它自己的进程树；关闭界面不会按 PID 越权清理。
+        # 外部进程树由 runner 清理，此处仅回收已退出的 runner。
         if self.runner is not None and self.runner.poll() is not None:
             self.runner.wait()
             self.runner = None

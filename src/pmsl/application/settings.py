@@ -1,4 +1,4 @@
-"""设置在写入成功后更新内存，绘制只读取当前快照。"""
+"""读取和保存程序设置，在保存成功后更新内存快照。"""
 
 from dataclasses import replace
 from typing import Any

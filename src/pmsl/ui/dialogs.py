@@ -1,4 +1,4 @@
-"""复用原 PyMsgBox 外观，并统一管理文件选择器根窗口。"""
+"""封装主线程中的确认、输入和文件选择弹窗，并管理 Tk 根窗口。"""
 
 import threading
 from typing import Any, Optional
@@ -56,7 +56,7 @@ class Dialogs:
         self._closed = True
 
 
-# 仅供过渡业务模块使用，正式页面由 bootstrap 传入 Dialogs。
+# 为模块级弹窗函数按需创建并复用管理器。
 _default: Optional[Dialogs] = None
 
 

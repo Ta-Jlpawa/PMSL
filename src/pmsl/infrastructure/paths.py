@@ -1,4 +1,4 @@
-"""所有持久化文件限定在程序目录，拒绝符号链接和重解析点。"""
+"""定位程序、资源和数据目录，校验路径边界及链接路径。"""
 
 import os
 import stat
@@ -23,7 +23,7 @@ class AppPaths:
     def discover(cls) -> "AppPaths":
         if getattr(sys, "frozen", False):
             return cls(Path(sys.executable).resolve().parent)
-        # 源码布局是 <程序目录>/src/pmsl/infrastructure/paths.py。
+        # 从当前模块位置向上定位仓库根目录。
         return cls(Path(__file__).resolve().parents[3])
 
     def inside(self, value: PathValue) -> Path:

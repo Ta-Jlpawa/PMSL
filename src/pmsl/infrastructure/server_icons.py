@@ -1,4 +1,4 @@
-"""图标编码与程序内原子替换；显示名称不参与文件定位。"""
+"""将图标编码为 PNG，并按服务器 ID 保存到对应服务器目录。"""
 
 import io
 import struct
@@ -54,6 +54,5 @@ class ServerIcons:
         self.storage._require_lock()
         profile = self.store.get(server_id)
         target = self.layout.file(profile, "icon.png")
-        # 图标固定存放在服务器目录；无需同时修改可选的清单图标引用。
         atomic_write(self.paths, target, payload)
         return target

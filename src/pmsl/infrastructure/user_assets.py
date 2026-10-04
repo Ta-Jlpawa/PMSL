@@ -1,4 +1,4 @@
-"""自定义资源复制到程序内独立目录，失败时只清理本次副本。"""
+"""校验并导入自定义图片和字体，将资源副本保存在程序数据目录。"""
 
 import os
 from pathlib import Path
@@ -20,7 +20,7 @@ class UserAssets:
         origin = Path(source)
         if origin.suffix.lower() != extension or extension not in {".png", ".ttf"}:
             raise StorageError("请选择 PNG 图片或 TTF 字体。")
-        # 文件名保留供界面显示；每次导入使用独立目录，避免同名资源覆盖。
+        # 为每次导入分配独立目录，保留文件名并避免同名覆盖。
         directory = self.paths.data("user-assets/" + uuid4().hex)
         target = self.paths.inside(directory / origin.name)
         partial = self.paths.inside(directory / "import.part")

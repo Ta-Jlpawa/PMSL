@@ -1,4 +1,4 @@
-"""完整路径作为缓存键；资源只在准备页面时加载，绘制时读取已缓存对象。"""
+"""加载、缩放并缓存图片和字体，按完整资源路径管理缓存。"""
 
 from collections import OrderedDict
 from pathlib import Path
